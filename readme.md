@@ -3,7 +3,8 @@
 1. run `npm install` in the project directory
 2. open your browser to http://localhost:3000/
 
-# Please note some changes were required to the original project files and to the project instructions to complete the project
+Please note some changes were required to the original project files and to the project instructions to complete the project.
+
 # index.html
 Inside index.html change the following:
 ```
@@ -28,7 +29,3 @@ The [project instructions](https://teamtreehouse.com/projects/using-gulp-to-buil
 `As a developer, I should be able to run the gulp images command at the command line to optimize the size of the project’s JPEG and PNG files, and then copy those optimized images to the dist/content folder.`
 
 However, the index.html file looks for the images in `images/` folder so it is my understanding that `dist/images` needs to exist and contain the images, NOT `dist/content` as described in the instructions.
-
-# todo
-
-I don't understand why when I run the project an odd numbber of times the dist folder is not the same as when i run the project an even number of times. Namely, it seems the icon folder is missing on the odd number.

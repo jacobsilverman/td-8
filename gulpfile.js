@@ -1,5 +1,13 @@
 "use strict";
 
+/* 
+  Techdegree Project 8: Jacob Silverman
+  Run with `npm install` and `gulp`
+  No need to move the icons folder manually
+  Program will move icons as part of gulp build
+  See the readme for more details..
+*/
+
 const { task, src, dest, series, watch } = require("gulp"),
   concat = require("gulp-concat"),
   uglify = require("gulp-uglify"),
@@ -9,18 +17,17 @@ const { task, src, dest, series, watch } = require("gulp"),
   del = require("del"),
   connect = require("gulp-connect"),
   pump = require('pump');
-/*  
-  run gulp scripts to concat and minify js
 
-  concatenate all of the project's js files into js/global.js, 
-
-  minify/uglify js/global.js then copy global.js to the dist/scripts folder and rename as all.min.js
-*/
+// gulp scripts for js files to dist/
 var scripts = (done) => {
   pump(
+    // source maps are generated with sourcemaps: true
     src("js/circle/*.js", { sourcemaps: true }),
+    // concat all js files into one file
     concat("all.min.js"),
+    // minify all-to-one js file
     uglify(),
+    // copy file to dist/scripts folder
     dest("dist/scripts/", { sourcemaps: true }),
     (err) => { 
       if (err) console.log('scripts err: ', err);
@@ -29,12 +36,16 @@ var scripts = (done) => {
   );
 };
 
+// gulp styles for moving css files to dist/
 var styles = (done) => {
   pump(
     src("sass/global.scss", { sourcemaps: true }),
+    // compile the project’s SCSS files into CSS
     sass(),
     cleanCSS(),
+    // concatenate and minify into an all.min.css
     concat("all.min.css"),
+    // copy the file to dist/styles
     dest("dist/styles/", { sourcemaps: true }),
     connect.reload(),
     (err) => { 
@@ -47,7 +58,9 @@ var styles = (done) => {
 var images = (done) => {
   pump(
     src("images/*.{jpg,png}"),
+    // optimize the size of the project’s JPEG and PNG files
     image(),
+    // copy optimized images to the dist/content folder.
     dest("dist/images/"),
     (err) => { 
       if (err) console.log('images err: ', err);
@@ -56,6 +69,7 @@ var images = (done) => {
   )
 };
 
+// move icons to dist/
 var icons = (done) => {
   pump(
     src("icons/**/*"),
@@ -68,6 +82,7 @@ var icons = (done) => {
   )
 };
 
+// move html file to dist/
 var html = (done) => {
   pump(
     src("index.html"),
@@ -81,6 +96,7 @@ var html = (done) => {
 
 var clean = (done) => {
   try {
+    // delete all of the files and folders in the dist folder.
     del("dist/")
     done();
   } catch(err){
@@ -101,6 +117,10 @@ var connector = (done) => {
   }
 };
 
+/* 
+  EXTRA CREDIT: continuously watch for changes to any .scss file in my project.
+*/
+
 var watcher = (done) => {
   try {
     watch(["sass/**/*.scss"], series(styles));
@@ -109,10 +129,21 @@ var watcher = (done) => {
   }
 } 
 
+/* 
+  should be able to run the gulp build command at the command line 
+  series: clean task completes before the other commands
+*/
+
 var serve = series(connector, watcher);
-var build = series(clean, scripts, styles, images, html);
+var build = series(clean, scripts, styles, images, html, icons);
 
-// user can run gulp scripts
+// should be able to run the following gulp command(s) at the command line
 exports.scripts = scripts;
-
+exports.styles = styles;
+exports.clean = clean;
+exports.images = images;
+/* 
+  should be able to run the gulp command at the command line 
+  to run the build task and serve my project using a local web server.
+*/
 exports.default = series(build, serve);
