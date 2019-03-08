@@ -1,2 +1,6 @@
 .DS_Store
-.sass-cache
+.sass-cache/
+/node_modules/
+dist/
+package-lock.json
+# /js/global.js
