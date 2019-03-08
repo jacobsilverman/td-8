@@ -1,4 +1,4 @@
-# instructions:
+# Instructions:
 
 1. run `npm install` in the project directory
 2. run `gulp`
@@ -16,8 +16,12 @@ However, `gulp` or `gulp default` will automatically run `gulp buld` then `gulp 
 
 Please note some changes were required to the original project files and to the project instructions to complete the project.
 
+# Project Instructions
+
+I did a few things that are not in the project instructions. The reviewer does not have to do anything regarding these to run or review the project. I am just putting them here for posterity.
+
 # index.html
-Inside index.html change the following:
+The [project instructions](https://teamtreehouse.com/projects/using-gulp-to-build-a-front-end-website) say to concat and minify scss and js files to `styles/all.min.css` and `scripts/all.min.js` respectively. However the index.html file loads css/js from css/global.css and js/global.js so inside index.html I changed the following to load the right files:
 ```
   <!-- CSS -->
   <link rel="stylesheet" href="css/global.css">
@@ -32,6 +36,7 @@ TO
   <!-- JS -->
   <script type="text/javascript" src="scripts/all.min.js"></script>
 ```
+
 
 # dist/images folder
 
