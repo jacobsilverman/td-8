@@ -15,6 +15,7 @@ const { task, src, dest, series, watch } = require("gulp"),
   cleanCSS = require("gulp-clean-css"),
   image = require("gulp-image"),
   del = require("del"),
+  maps = require("gulp-sourcemaps"),
   connect = require("gulp-connect"),
   pump = require('pump');
 
@@ -23,10 +24,14 @@ var scripts = (done) => {
   pump(
     // source maps are generated with sourcemaps: true
     src("js/circle/*.js", { sourcemaps: true }),
+    // initiate sourcemaps 
+    maps.init(),
     // concat all js files into one file
     concat("all.min.js"),
     // minify all-to-one js file
     uglify(),
+    // write sourcemaps to dest directory
+    maps.write("./"),
     // copy file to dist/scripts folder
     dest("dist/scripts/", { sourcemaps: true }),
     (err) => { 
@@ -40,11 +45,13 @@ var scripts = (done) => {
 var styles = (done) => {
   pump(
     src("sass/global.scss", { sourcemaps: true }),
+    maps.init(),
     // compile the project’s SCSS files into CSS
     sass(),
     cleanCSS(),
     // concatenate and minify into an all.min.css
     concat("all.min.css"),
+    maps.write("./"),
     // copy the file to dist/styles
     dest("dist/styles/", { sourcemaps: true }),
     connect.reload(),
