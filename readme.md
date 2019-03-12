@@ -44,4 +44,4 @@ The [project instructions](https://teamtreehouse.com/projects/using-gulp-to-buil
 
 `As a developer, I should be able to run the gulp images command at the command line to optimize the size of the project’s JPEG and PNG files, and then copy those optimized images to the dist/content folder.`
 
-However, the index.html file looks for the images in `images/` folder so it is my understanding that `dist/images` needs to exist and contain the images, NOT `dist/content` as described in the instructions.
+However, the index.html file looks for the images in `images/` folder so I changed all the references to `dist/images` in the index.html to references to `dist/content`.
