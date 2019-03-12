@@ -68,7 +68,7 @@ var images = (done) => {
     // optimize the size of the project’s JPEG and PNG files
     image(),
     // copy optimized images to the dist/content folder.
-    dest("dist/images/"),
+    dest("dist/content/"),
     (err) => { 
       if (err) console.log('images err: ', err);
       done();
@@ -149,6 +149,7 @@ exports.scripts = scripts;
 exports.styles = styles;
 exports.clean = clean;
 exports.images = images;
+exports.build = build;
 /* 
   should be able to run the gulp command at the command line 
   to run the build task and serve my project using a local web server.
