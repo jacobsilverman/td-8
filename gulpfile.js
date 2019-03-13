@@ -17,7 +17,8 @@ const { task, src, dest, series, watch } = require("gulp"),
   del = require("del"),
   maps = require("gulp-sourcemaps"),
   connect = require("gulp-connect"),
-  pump = require('pump');
+  pump = require('pump'),
+  open = require('gulp-open');
 
 // gulp scripts for js files to dist/
 var scripts = (done) => {
@@ -137,11 +138,29 @@ var watcher = (done) => {
 } 
 
 /* 
+  CONVENIENCE TASK: open browser
+*/
+
+var opener = (done) => {
+  var options = {
+    uri: 'http://localhost:3000'
+  };
+  pump(
+    src('./'),
+    open(options),
+    (err) => { 
+      if (err) console.log('opener err: ', err);
+      done();
+     }
+  );
+}
+
+/* 
   should be able to run the gulp build command at the command line 
   series: clean task completes before the other commands
 */
 
-var serve = series(connector, watcher);
+var serve = series(connector, opener, watcher);
 var build = series(clean, scripts, styles, images, html, icons);
 
 // should be able to run the following gulp command(s) at the command line
