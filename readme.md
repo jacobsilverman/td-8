@@ -2,7 +2,8 @@
 
 1. run `npm install` in the project directory
 2. run `gulp`
-3. open your browser to http://localhost:3000/
+
+Program should open default browser to http://localhost:3000/
 
 Individual commands you can run include: 
 
@@ -14,9 +15,13 @@ Individual commands you can run include:
 
 However, `gulp` or `gulp default` will automatically run `gulp buld` then `gulp serve` (guaranteed in series).
 
-Please note some changes were required to the original project files and to the project instructions to complete the project.
+# Exceeds Grade / Extra Credit
+
+Make any change to .scss file to see live-reloading of styles files. You shoul d NOT have to quit and/or re-run the program to see changes. For example, in variables.scss change the `$display-color: #222222;` to `#FFF` and the text font for the name David Hiser will turn from #222222 to White.
 
 # Project Instructions
+
+Please note some changes were required to the original project files and to the project instructions to complete the project.
 
 I did a few things that are not in the project instructions. The reviewer does not have to do anything regarding these to run or review the project. I am just putting them here for posterity.
 
